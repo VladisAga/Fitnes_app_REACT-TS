@@ -1,0 +1,13 @@
+<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <desc>
+        Created with Pixso.
+    </desc>
+    <defs>
+        <clipPath id="clip15_25104">
+            <rect id="Property 1=heart" width="14" height="14" fill-opacity="0"/>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#clip15_25104)">
+        <path id="bg" d="M9.18896 2.94006C8.23486 2.94006 7.40723 3.47266 7 4.25073C6.59277 3.47266 5.76514 2.94006 4.81055 2.94006C3.45312 2.94006 2.35254 4.01831 2.35254 5.34863C2.35254 7.97522 7 10.9529 7 10.9529C7 10.9529 11.6475 7.97522 11.6475 5.34863C11.6475 4.01831 10.5469 2.94006 9.18896 2.94006Z" fill="rgb(47, 84, 235)" stroke="rgb(47, 84, 235)" stroke-width="1"/>
+    </g>
+</svg>

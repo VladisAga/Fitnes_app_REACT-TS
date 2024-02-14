@@ -1,0 +1,114 @@
+$icon-width: 14px;
+$icon-height: 14px;
+$icon-margin: 8px;
+$icon-padding-top: 2px;
+
+@mixin icon-before($url) {
+    content: "";
+    display: inline-block;
+    width: $icon-width;
+    height: $icon-height;
+    background-image: url('#{$url}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: $icon-margin;
+}
+
+.footer {
+    :global {
+        .ant-layout-footer {
+            background-color: transparent;
+            padding: 0 24px 41px;
+        }
+    }
+
+    .footerContent {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .seeComment {
+            font-size: 16px;
+            color: rgb(47, 84, 235);
+            padding: 9.5px 15px;
+        }
+
+        .downloadSection {
+            background-color: white;
+            min-width: 240px;
+            // order: 1;
+
+            .download {
+                font-size: 16px;
+                color: rgb(47, 84, 235);
+            }
+
+            .pro {
+                color: rgb(140, 140, 140);
+                padding-top: 3.7px;
+            }
+
+            .firstElem {
+                padding: 12px 24px;
+                border-bottom: 1px solid rgb(240, 240, 240);
+            }
+
+            .byWhatApp {
+                display: flex;
+                gap: 29.7px;
+                padding: 12.75px 12px 16.5px;
+            }
+
+            .android,
+            .ios {
+                padding: 7px 0;
+            }
+
+            .android::before {
+                @include icon-before('/images/icons/android.svg');
+            }
+
+
+            .ios::before {
+                @include icon-before('/images/icons/apple.svg');
+            }
+
+        }
+    }
+
+    @media all and (max-width: 670px) {
+        .classToOrder {
+            order: 2;
+        }
+
+        .downloadSection {
+            order: 1;
+        }
+
+        .footerContent {
+            justify-content: center;
+            row-gap: 33.5px;
+        }
+    }
+
+    @media all and (max-width: 480px) {
+        .downloadSection{
+            width: 100%;
+        }
+
+        .firstElem{
+            text-align: center;
+        }
+
+        .footerContent .downloadSection .byWhatApp {
+            justify-content: center;
+            column-gap: 53px;
+        }
+
+        .footerContent .classToOrder .seeComment{
+            padding-top: 33.5px;
+            padding-bottom: 51.5px;
+        }
+    }
+}

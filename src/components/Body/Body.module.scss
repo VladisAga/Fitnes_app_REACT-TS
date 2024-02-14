@@ -1,0 +1,132 @@
+$icon-width: 14px;
+$icon-height: 14px;
+$icon-margin: 5px;
+$icon-padding-top: 2px;
+
+@mixin icon-before($url) {
+    content: "";
+    display: inline-block;
+    width: $icon-width;
+    height: $icon-height;
+    background-image: url('#{$url}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: $icon-margin;
+}
+
+.body {
+    :global {
+        .ant-layout-content {
+            background-size: cover;
+            background-position: center;
+            background-image: url('/images/backImg_1440.png');
+        }
+    }
+
+    * {
+        margin: 0;
+        font-family: 'Inter';
+        font-weight: 500;
+
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        padding: 24px 24px 180px;
+    }
+
+    .yourAbilityWIthUs {
+        background-color: white;
+        padding: 24px;
+        max-width: 752px;
+        margin-bottom: 24px;
+        font-size: 16px;
+
+        ul {
+            list-style-type: none;
+            color: rgb(6, 17, 120);
+        }
+
+        li {
+            line-height: 1.1;
+        }
+
+        li:first-child~li:before {
+            content: "—";
+            color: rgb(6, 17, 120);
+            font-weight: bold;
+            margin-right: 5px;
+        }
+    }
+
+    .slogan {
+        background-color: white;
+        padding: 24px;
+        max-width: 752px;
+        margin-bottom: 16px;
+        font-style: bold;
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .tasks {
+        display: flex;
+        max-width: 752px;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 16px;
+
+        div {
+            background-color: white;
+            flex: 1 1;
+
+            p {
+                padding: 12px 14px;
+                border-bottom: 1px solid rgb(240, 240, 240);
+                text-align: center;
+            }
+        }
+
+        .button {
+            color: rgb(47, 84, 235);
+            width: 100%;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            padding: 19px 0;
+        }
+
+        .btn1::before {
+            @include icon-before('/images/icons/Property 1=heart.svg');
+        }
+
+        .btn2::before {
+            @include icon-before('/images/icons/Property 1=calendar.svg');
+        }
+
+        .btn3::before {
+            @include icon-before('/images/icons/Property 1=profile.svg');
+        }
+    }
+}
+
+@media all and (max-width: 480px) {
+    .body {
+        .tasks {
+            flex-direction: column;
+            gap: 8px;
+
+        }
+
+        // // .slogan {
+        // //     p {
+        // //         text-align: justify;
+        // //     }
+        // }
+
+        .content {
+            padding: 24px;
+        }
+    }
+}
