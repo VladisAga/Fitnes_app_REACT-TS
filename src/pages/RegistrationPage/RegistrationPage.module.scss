@@ -1,0 +1,70 @@
+.regBox {
+    padding-top: 140px;
+
+    .registrationArea {
+        max-width: 540px;
+        margin: 0 auto;
+        background-color: white;
+
+        :global {
+            .ant-tabs {
+                max-width: 370px;
+                margin: 0 auto;
+            }
+
+            .ant-tabs-nav-list {
+                width: 100%;
+                font-size: 16px;
+                font-family: 'Inter';
+            }
+
+            .ant-tabs-nav {
+                margin-bottom: 24px;
+            }
+
+            .ant-tabs-tab {
+                flex: 1;
+                margin: 0;
+                justify-content: center;
+            }
+
+            .ant-tabs-tab-btn {
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 1.2;
+                color: black;
+            }
+
+            .ant-tabs-tab-active .ant-tabs-tab-btn {
+                color: rgb(47, 84, 235);
+            }
+
+            .ant-tabs-ink-bar {
+                background: rgb(47, 84, 235);
+            }
+        }
+
+        .logoBox {
+            max-width: 310px;
+            margin: 0 auto;
+            padding: 64px 0 48px;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.regBoxVariation {
+    padding-top: 168px;
+}
+
+.whiteArea {
+    height: 174px;
+}
+
+.whiteAreaVariation {
+    height: 64px;
+}
+

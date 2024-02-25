@@ -1,0 +1,113 @@
+$mainColor: rgb(47, 84, 235);
+
+.enterForm {
+    :global {
+
+        .ant-form-item-explain-error {
+            font-family: 'Inter';
+            font-size: 12px;
+        }
+
+        .ant-form-item-explain {
+            font-size: 12.7px;
+        }
+
+        .ant-btn {
+            width: 100%;
+            background-color: $mainColor;
+            border: none;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+
+            span {
+                font-family: 'Inter';
+                font-size: 16px;
+            }
+        }
+
+        .undefined {
+            color: rgb(191, 191, 191);
+            background-color: rgb(245, 245, 245);
+            border: 1px solid rgb(217, 217, 217);
+        }
+
+        .ant-form-item {
+            margin-bottom: 32px;
+        }
+
+        .ant-input-group-addon {
+            font-family: 'Inter';
+            font-weight: 400;
+            padding: 0 13px;
+        }
+
+        .ant-input {
+            font-size: 14px;
+
+            font-family: 'Inter';
+            padding: 11px 11px;
+            line-height: 1.2;
+        }
+
+        .ant-input-password {
+            padding: 11px 11px;
+            line-height: 1.2;
+        }
+
+        .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+        .ant-checkbox:hover .ant-checkbox-inner {
+            border-color: $mainColor;
+        }
+
+        .ant-checkbox-checked .ant-checkbox-inner {
+            background-color: $mainColor;
+        }
+
+        .login-form-forgot {
+            color: $mainColor;
+        }
+
+        .anticon {
+            margin-right: 6px;
+        }
+    }
+
+    .memorySection {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 23px;
+
+        button {
+            background-color: transparent;
+            padding: 0;
+            transition: none;
+            font-size: 16px;
+            font-family: 'Inter';
+            font-weight: 400;
+            border: none;
+        }
+
+        button:focus {
+            outline: none;
+        }
+    }
+
+    .googleBtn {
+        background-color: transparent;
+        color: black;
+        width: 100%;
+        padding: 9.5px 0;
+        border: 1px solid rgb(217, 217, 217);
+        border-radius: 2px;
+
+        font-size: 16px;
+        font-weight: 400;
+
+        a {
+            color: black;
+        }
+    }
+}

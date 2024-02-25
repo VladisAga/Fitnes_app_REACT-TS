@@ -1,0 +1,67 @@
+.resBox {
+    padding-top: 340px;
+}
+
+.error {
+    padding-top: 235px;
+}
+
+.resultSection {
+    max-width: 540px;
+    margin: 0 auto;
+    background-color: white;
+    font-family: 'Inter';
+
+
+    .resultSecContent {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+
+
+        .imgBox {
+            margin: 70px auto 30px;
+        }
+
+        h2 {
+            font-size: 24px;
+            text-align: center;
+            color: rgb(38, 38, 38);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 14px;
+            text-align: center;
+            color: rgb(140, 140, 140);
+            font-weight: 400;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        
+        }
+
+        .linkBox {
+            margin-bottom: 64px;
+            max-width: 370px;
+            margin-right: 30px;
+            padding-left: 30px;
+
+            .resultLink {
+                display: inline-block;
+                color: white;
+                background-color: rgb(47, 84, 235);
+                width: 100%;
+                margin: 0 auto;
+                padding: 11px 0;
+                font-size: 14px;
+                font-weight: 400;
+                text-align: center;
+            }
+        }
+    }
+
+
+}

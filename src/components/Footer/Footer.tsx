@@ -1,5 +1,5 @@
 // import cn from 'classnames';
-import { Link } from '@components/LInk/Link';
+import { LinkFC } from '@components/LInk/LinkFC';
 import styles from './Footer.module.scss';
 import { Layout } from 'antd';
 const { Footer } = Layout;
@@ -14,15 +14,15 @@ export const FooterFC: React.FC<IFooter> = () => {
                 <Footer >
                     <section className={styles.footerContent}>
                         <div className={styles.classToOrder}>
-                            <Link href='#' className={styles['seeComment']}>Смотреть отзывы</Link>
+                            <LinkFC href='#' className={styles['seeComment']}>Смотреть отзывы</LinkFC>
                         </div>
                         <section className={styles.downloadSection}>
-                            <div className={styles.firstElem}><Link className={styles.download} href='#'>Скачать на телофон</Link>
+                            <div className={styles.firstElem}><LinkFC className={styles.download} href='#'>Скачать на телофон</LinkFC>
                                 <p className={styles.pro}>Доступно в PRO-тарифе</p>
                             </div>
                             <div className={styles.byWhatApp}>
-                                <div><Link href='#' className={styles.android}>Android OS</Link></div>
-                                <div><Link href='#' className={styles.ios}>Apple iOS</Link></div>
+                                <div><LinkFC href='#' className={styles.android}>Android OS</LinkFC></div>
+                                <div><LinkFC href='#' className={styles.ios}>Apple iOS</LinkFC></div>
                             </div>
                         </section>
                     </section>

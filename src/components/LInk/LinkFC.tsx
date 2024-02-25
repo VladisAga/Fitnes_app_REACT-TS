@@ -8,7 +8,7 @@ interface ILink {
     className?: string;
 }
 
-export const Link: React.FC<ILink> = ({children, className, href, ...props}) => {
+export const LinkFC: React.FC<ILink> = ({children, className, href, ...props}) => {
     return (   
             <a {...props} href={href} className={cn(styles['link'], className )}  >
                 {children}
