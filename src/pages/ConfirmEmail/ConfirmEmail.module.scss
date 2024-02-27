@@ -1,5 +1,5 @@
 .confirmBox {
-    padding-top: 340px;
+    padding: 340px 16px;
 }
 
 .error {
@@ -11,7 +11,7 @@
     margin: 0 auto;
     background-color: white;
     font-family: 'Inter';
-
+    padding: 0 16px;
 
     .confirmSecContent {
         width: 100%;
@@ -76,6 +76,10 @@
             }
         }
     }
+}
 
-
+@media all and (max-width: 360px) {
+    .confirmBox {
+        padding-top: 172px;
+    }
 }

@@ -41,16 +41,14 @@ const ConfirmEmail = () => {
                 email: previousValue,
                 code: value
             }).unwrap()
-                .then((data) => {
-                    console.log(data);
+                .then(() => {
                     setErrorStatus(false);
-                    navigate('/change-password', { replace: true })
+                    navigate('/auth/change-password', { replace: true })
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
                     setErrorStatus(true);
-                    clearInputArea();
                     setValue('');
+                    setTimeout(() => clearInputArea());
                 })
         }
     }, [value]);
@@ -76,6 +74,7 @@ const ConfirmEmail = () => {
                         Мы отправили вам на e-mail <span>{previousValue}</span> шестизначный код. Введите его в поле ниже.
                     </p>
                     <VerificationInput
+                        inputProps={{ 'data-test-id': 'verification-input' }}
                         classNames={{
                             character: errorStatus ? 'character' : ''
                         }}

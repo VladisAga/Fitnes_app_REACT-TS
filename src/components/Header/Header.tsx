@@ -4,7 +4,7 @@ import styles from './Header.module.scss';
 import { LinkFC } from '../LInk/LinkFC';
 // import { PageHeader } from '@ant-design/pro-layout';
 import { SettingOutlined } from '@ant-design/icons';
-import { useWindowWidth } from '@pages/main-page/WindowWidth';
+import { useWindowWidth } from '@hooks/useWindowWidth';
 
 const { Header } = Layout;
 

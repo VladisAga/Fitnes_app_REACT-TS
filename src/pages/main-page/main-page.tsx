@@ -8,8 +8,8 @@ import { HeaderFC } from '@components/Header/Header';
 import { LinkFC } from '@components/LInk/LinkFC';
 import { Button, Layout, Menu } from 'antd';
 import cn from 'classnames';
-import { Link, useNavigate } from "react-router-dom";
-import { useWindowWidth } from './WindowWidth';
+import { useNavigate } from "react-router-dom";
+import { useWindowWidth } from '../../hooks/useWindowWidth';
 import styles from './main-page.module.scss';
 
 const { Sider } = Layout;
@@ -35,9 +35,6 @@ export const MainPage: React.FC = () => {
     const windowWidth = useWindowWidth();
     useEffect(() => {
         switch (true) {
-            case (windowWidth >= 1440):
-                setDataTestId('sider-switch');
-                break;
             case (windowWidth >= 834):
                 setDataTestId('sider-switch');
                 break;
@@ -58,7 +55,7 @@ export const MainPage: React.FC = () => {
     }, [collapsed]);
 
     useEffect(() => {
-        if (!isAuthenticated) navigate('/registrationPage', { replace: true});
+        if (!isAuthenticated) navigate('/auth', { replace: true });
     }, [isAuthenticated]);
 
     const exit = () => {
@@ -84,20 +81,24 @@ export const MainPage: React.FC = () => {
                                     })} src={logo} alt='logo' />
                                 </div>
                             </div>
-                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} style={windowWidth < 480 ? { padding: '0' } : { paddingLeft: collapsed ? '24px' : '16px' }} />
+                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items}
+                                style={windowWidth < 480
+                                    ? { padding: '0' }
+                                    : { paddingLeft: collapsed ? '24px' : '16px' }} />
                         </section>
                         <section className={styles.exit} onClick={exit}>
-                            <LinkFC href='#' className={cn(styles['exitElem'], {
+                            <LinkFC href={'/auth'} className={cn(styles['exitElem'], {
                                 [styles['exitCollapsed']]: collapsed
                             })} >{!collapsed && <span>Выход</span>}</LinkFC>
-                            <Link to={'/registrationPage'}>Выход</Link>
                         </section>
                     </Sider>
                     <div className={styles.rictangle} style={windowWidth < 480 && collapsed ? { left: '0' } : undefined}>
                         <Button className={styles.sideBtn}
                             data-test-id={dataTestId}
                             type="text"
-                            icon={!collapsed ? <MenuUnfoldOutlined width={12.5} height={11} /> : <MenuFoldOutlined width={12.5} height={11} />}
+                            icon={!collapsed
+                                ? <MenuUnfoldOutlined width={12.5} height={11} />
+                                : <MenuFoldOutlined width={12.5} height={11} />}
                             onClick={() => setCollapsed(!collapsed)}
                             style={windowWidth < 480 ? {
                                 width: 32,

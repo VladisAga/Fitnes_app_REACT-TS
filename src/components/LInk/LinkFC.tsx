@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import styles from './Link.module.scss';
 import React, { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 interface ILink {
     href: string;
@@ -10,9 +11,9 @@ interface ILink {
 
 export const LinkFC: React.FC<ILink> = ({children, className, href, ...props}) => {
     return (   
-            <a {...props} href={href} className={cn(styles['link'], className )}  >
+            <Link {...props} to={href} className={cn(styles['link'], className )}  >
                 {children}
-            </a>
+            </Link>
         
     )
 }

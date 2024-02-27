@@ -10,7 +10,7 @@ const {
     createReduxHistory,
     routerMiddleware,
     routerReducer
-  } = createReduxHistoryContext({ history: createBrowserHistory() });
+  } = createReduxHistoryContext({ history: createBrowserHistory(), savePreviousLocations: 5 });
 
 export const store = configureStore({
     reducer: {

@@ -1,14 +1,15 @@
 import Lottie from 'react-lottie';
 import animationData from './loader.json';
 import styles from './Loader.module.scss';
-import { RootState } from '@redux/configure-store';
-import { useSelector } from 'react-redux';
 
+interface ILoader {
+  isLoading: boolean;
+}
 
-const Loader = () => {
-  const isLoading = useSelector((state: RootState) => state.isLoading.isLoading);
+const Loader: React.FC<ILoader> = ({ isLoading }) => {
+
   return (
-    <div className={styles.back} hidden={!isLoading}>
+    <div data-test-id='loader' className={styles.back} style={!isLoading ? { display: 'none' } : {}}>
       <Lottie
         isClickToPauseDisabled
         style={{
@@ -17,14 +18,12 @@ const Loader = () => {
           top: '50%',
           transform: 'translate(-50%, -50%)'
         }}
-
         height={200}
         width={200}
         options={{
           animationData: animationData,
           loop: true,
           autoplay: true,
-
         }}
       />
     </div>

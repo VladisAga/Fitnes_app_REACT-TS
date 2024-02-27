@@ -9,9 +9,6 @@ export const checkLocationSlice = createSlice({
         previousValueRed: null
     },
     reducers: {
-        setPreviousPath: (state, action) => {
-            state.previousPath = action.payload;
-        },
         setPreviousValue: (state, action) => {
             state.previousValueRed = action.payload;
         },
@@ -25,7 +22,7 @@ export const checkLocationSlice = createSlice({
     },
 });
 
-export const { setPreviousPath, savePreviousValue, getSavedValue, setPreviousValue } = checkLocationSlice.actions;
+export const { savePreviousValue, getSavedValue, setPreviousValue } = checkLocationSlice.actions;
 
 export default checkLocationSlice.reducer;
 

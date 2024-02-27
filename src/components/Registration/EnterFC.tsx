@@ -6,15 +6,15 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { usePostEnterUserMutation, usePostCheckEmailMutation } from '@redux/usersApi';
 import { useEffect, useState } from 'react';
 import { initAuth, setAuth } from '../../redux/checkAuthSlice';
-import { setPreviousPath, savePreviousValue, getSavedValue, setPreviousValue } from '@redux/checkLocationSlice';
+import { savePreviousValue, getSavedValue, setPreviousValue } from '@redux/checkLocationSlice';
 import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
 import { resultValues } from '@pages/RusultPage/resultValues';
 import { RootState } from '@redux/configure-store';
 
 const EnterFC = () => {
     const dispatch = useDispatch();
-    const previousPath = useSelector((state: RootState) => state.checkLocation.previousPath);
     const previousValueRed = useSelector((state: RootState) => state.checkLocation.previousValueRed);
+    const previousLocation = useSelector((state: RootState) => state.router.previousLocations);
     const [enter, { isLoading: enterLoad }] = usePostEnterUserMutation();
     const [checkEmail, { isLoading: checkEmailLoad }] = usePostCheckEmailMutation();
     const [userData, setUserData] = useState({});
@@ -34,40 +34,38 @@ const EnterFC = () => {
     }, [navigate]);
 
     useEffect(() => {
-        if (previousPath === '/registrationPage/result/500Error') {
-            dispatch(setPreviousPath('/registrationPage'));
+        if (previousLocation && previousLocation[1] && previousLocation[1].location?.pathname === '/result/error-check-email') {
             checkEmail({ email: previousValueRed }).unwrap()
                 .then(() => {
                     dispatch(savePreviousValue(value));
-                    navigate('/confirm-email', { replace: true });
+                    navigate('/auth/confirm-email', { replace: true });
                 })
                 .catch((error) => {
                     if (error.data.message === "Email не найден") {
-                        navigate(`/registrationPage/result/${resultValues.emailError.trigger}`, { replace: true })
+                        navigate(`/result/${resultValues['error-check-email-no-exist'].trigger}`, { replace: true })
                     } else {
                         dispatch(setPreviousValue(previousValueRed));
-                        navigate(`/registrationPage/result/${resultValues['500Error'].trigger}`, { replace: true })
+                        navigate(`/result/${resultValues['error-check-email'].trigger}`, { replace: true })
                     }
                 });
         }
-        dispatch(setPreviousPath('/registrationPage'));
     }, [previousValueRed]);
 
-    const handleAddUser = async (values: any) => {
+    const handleAddUser = (values: any) => {
         setUserData(values);
         if (values) {
-            try {
-                const response = await enter({ ...values.user, password: values.password }).unwrap();
-                const action = setAuth(true);
-                dispatch(action);
-                if (values.remember) {
-                    localStorage.setItem('token', response.accessToken);
-                    dispatch(initAuth());
-                }
-                navigate(`/main`, { replace: true, state: values.remember ? values.remember.toString() : '' });
-            } catch (error: any) {
-                navigate(`/registrationPage/result/${resultValues['error-login'].trigger}`, { replace: true });
-            }
+            enter({ ...values.user, password: values.password }).unwrap()
+                .then((data) => {
+                    const action: any = setAuth(true);
+                    dispatch(action);
+                    if (values.remember) {
+                        localStorage.setItem('token', data.accessToken);
+                        dispatch(initAuth());
+                    }
+                    navigate(`/main`, { replace: true, state: values.remember ? values.remember.toString() : '' });
+                }).catch(() => {
+                    navigate(`/result/${resultValues['error-login'].trigger}`, { replace: true });
+                })
         }
     };
 
@@ -80,14 +78,14 @@ const EnterFC = () => {
             checkEmail({ email: value }).unwrap()
                 .then(() => {
                     dispatch(savePreviousValue(value));
-                    navigate('/confirm-email', { replace: true });
+                    navigate('/auth/confirm-email', { replace: true });
                 })
                 .catch((error) => {
-                    if (error.data.message === "Email не найден") {
-                        navigate(`/registrationPage/result/${resultValues.emailError.trigger}`, { replace: true })
+                    if (error.status === 404) {
+                        navigate(`/result/${resultValues['error-check-email-no-exist'].trigger}`, { replace: true })
                     } else {
                         dispatch(setPreviousValue(value));
-                        navigate(`/registrationPage/result/${resultValues['500Error'].trigger}`, { replace: true })
+                        navigate(`/result/${resultValues['error-check-email'].trigger}`, { replace: true })
                     }
                 });
         } else {
@@ -98,8 +96,8 @@ const EnterFC = () => {
     useEffect(() => {
         if (enterLoad || checkEmailLoad) {
             dispatch(setStateOfLoadTrue());
-        } 
-        return () => {  dispatch(setStateOfLoadFalse());}
+        }
+        return () => { dispatch(setStateOfLoadFalse()); }
     }, [enterLoad, checkEmailLoad]);
 
     return (
@@ -114,7 +112,7 @@ const EnterFC = () => {
                 <Form.Item name={['user', 'email']}
                     rules={[{ type: 'email', required: true, message: '' },
                     ]}>
-                    <Input addonBefore='e-mail:' value={value} onChange={(e) => setValue(e.currentTarget.value)} />
+                    <Input data-test-id='login-email' addonBefore='e-mail:' value={value} onChange={(e) => setValue(e.currentTarget.value)} />
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -127,22 +125,22 @@ const EnterFC = () => {
                         },
                     })]}
                 >
-                    <Input.Password placeholder='Пароль' />
+                    <Input.Password data-test-id='login-password' placeholder='Пароль' />
                 </Form.Item>
                 <Form.Item style={{ marginBottom: '26px' }}>
                     <section className={styles.memorySection}>
                         <Form.Item name="remember" valuePropName="checked" noStyle>
-                            <Checkbox>Запомнить меня</Checkbox>
+                            <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                         </Form.Item>
                         <div>
-                            <button className="login-form-forgot" disabled={linkState} onClick={resetPassword}>
+                            <button data-test-id='login-forgot-button' className="login-form-forgot" disabled={linkState} onClick={resetPassword}>
                                 Забыли пароль?
                             </button>
                         </div>
                     </section>
                 </Form.Item>
                 <Form.Item style={{ marginBottom: '16px' }}>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
+                    <Button data-test-id='login-submit-button' type="primary" htmlType="submit" className="login-form-button">
                         Войти
                     </Button>
                 </Form.Item>

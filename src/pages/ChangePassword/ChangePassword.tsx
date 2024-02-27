@@ -4,7 +4,7 @@ import { usePostChangePasswordMutation } from '@redux/usersApi';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { resultValues } from '@pages/RusultPage/resultValues';
-import { setPreviousValue, setPreviousPath } from '@redux/checkLocationSlice';
+import { setPreviousValue } from '@redux/checkLocationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@redux/configure-store';
 import { IPreviousValueRed } from '../../types/commonTypes';
@@ -13,40 +13,34 @@ import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
 const ChangePassword = () => {
     const [changePassword, { isLoading }] = usePostChangePasswordMutation();
     const previousValueRed = useSelector((state: RootState) => state.checkLocation.previousValueRed) as IPreviousValueRed | null;
-    const previousPath = useSelector((state: RootState) => state.checkLocation.previousPath);
+    const previousLocation = useSelector((state: RootState) => state.router.previousLocations);
     const [password, setPassword] = useState({});
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (previousPath === '/registrationPage/result/error-change-password') {
-            dispatch(setPreviousPath('/change-password'));
+        if (previousLocation && previousLocation[1] && previousLocation[1].location?.pathname === '/result/error-change-password') {
             previousValueRed && changePassword({ password: previousValueRed.password, confirmPassword: previousValueRed.confirm }).unwrap()
                 .then(() => {
-                    navigate(`/registrationPage/result/${resultValues['success-change-password'].trigger}`, { replace: true })
+                    navigate(`/result/${resultValues['success-change-password'].trigger}`, { replace: true })
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
                     dispatch(setPreviousValue(previousValueRed));
-                    navigate(`/registrationPage/result/${resultValues['error-change-password'].trigger}`, { replace: true })
+                    navigate(`/result/${resultValues['error-change-password'].trigger}`, { replace: true })
                 })
         }
-        dispatch(setPreviousPath('/change-password'));
     }, [previousValueRed]);
 
     const changePas = (value: any) => {
-        console.log('Received values of form: ', value);
         setPassword(value);
-        console.log({ password: value.password, confirmPassword: value.confirm })
         if (password) {
             changePassword({ password: value.password, confirmPassword: value.confirm }).unwrap() //!!!!!!!
                 .then(() => {
-                    navigate(`/registrationPage/result/${resultValues['success-change-password'].trigger}`, { replace: true })
+                    navigate(`/result/${resultValues['success-change-password'].trigger}`, { replace: true })
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
                     dispatch(setPreviousValue(password));
-                    navigate(`/registrationPage/result/${resultValues['error-change-password'].trigger}`, { replace: true })
+                    navigate(`/result/${resultValues['error-change-password'].trigger}`, { replace: true })
                 })
         }
     };
@@ -81,7 +75,7 @@ const ChangePassword = () => {
                             },
                         })]}
                     >
-                        <Input.Password placeholder='Пароль' />
+                        <Input.Password data-test-id='change-password' placeholder='Новый пароль' />
                     </Form.Item>
                     <Form.Item
                         style={{ marginBottom: '62px' }}
@@ -102,10 +96,10 @@ const ChangePassword = () => {
                             }),
                         ]}
                     >
-                        <Input.Password placeholder='Повторите пароль' />
+                        <Input.Password data-test-id='change-confirm-password' placeholder='Повторите пароль' />
                     </Form.Item>
                     <Form.Item >
-                        <Button type="primary" htmlType="submit" >
+                        <Button data-test-id='change-submit-button' type="primary" htmlType="submit" >
                             Сохранить
                         </Button>
                     </Form.Item>

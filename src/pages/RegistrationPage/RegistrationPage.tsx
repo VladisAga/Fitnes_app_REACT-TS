@@ -4,6 +4,7 @@ import { Tabs } from 'antd';
 import styles from './RegistrationPage.module.scss';
 import cn from 'classnames';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface IRegistrationPage {
     keyValue?: string;
@@ -11,15 +12,22 @@ interface IRegistrationPage {
 
 const RegistrationPage: React.FC<IRegistrationPage> = ({ keyValue }) => {
     const [key, setKey] = useState('1');
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (keyValue) {
-            setKey(keyValue); 
+            setKey(keyValue);
         }
-    }, [keyValue]); 
+    }, [keyValue]);
+
+    useEffect(() => {
+        if (key === '2') {
+            navigate('/auth/registration', { replace: true })
+        }
+    }, [key])
 
     const onChange = (key: string) => {
-        setKey(key); 
+        setKey(key);
     };
 
     return (
@@ -28,7 +36,7 @@ const RegistrationPage: React.FC<IRegistrationPage> = ({ keyValue }) => {
         })}>
             <section className={styles.registrationArea}>
                 <div className={styles.logoBox}>
-                    <img src="/logo.svg" alt="" />
+                    <img src='/logo.svg' alt="logo" />
                 </div>
                 <Tabs
                     defaultActiveKey={keyValue ? keyValue : '1'}
@@ -50,7 +58,6 @@ const RegistrationPage: React.FC<IRegistrationPage> = ({ keyValue }) => {
                     [styles['whiteAreaVariation']]: key === '2'
                 })}></div>
             </section>
-
         </div>
     )
 }
