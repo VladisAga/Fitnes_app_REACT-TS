@@ -2,11 +2,11 @@ import Lottie from 'react-lottie';
 import animationData from './loader.json';
 import styles from './Loader.module.scss';
 
-interface ILoader {
+type TLoader = {
   isLoading: boolean;
 }
 
-const Loader: React.FC<ILoader> = ({ isLoading }) => {
+const Loader: React.FC<TLoader> = ({ isLoading }) => {
 
   return (
     <div data-test-id='loader' className={styles.back} style={!isLoading ? { display: 'none' } : {}}>

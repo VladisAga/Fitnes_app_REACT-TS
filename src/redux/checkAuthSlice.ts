@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-export interface checkAuthState {
+export type checkAuthState = {
     auth: boolean
 }
 

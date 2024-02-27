@@ -1,5 +1,5 @@
 .resBox {
-    padding: 340px 16px 0;
+    padding: 340px 16px 180px;
 }
 
 .error {
@@ -19,7 +19,6 @@
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-
 
         .imgBox {
             margin: 70px auto 30px;
@@ -76,10 +75,12 @@
 @media all and (max-width: 360px) {
     .resBox {
         padding-top: 241px;
+        padding-bottom: 240px;
     }
 
     .error {
         padding-top: 116px;
+        padding-bottom: 116px;
     }
 
     .resultSection {

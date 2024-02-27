@@ -8,11 +8,12 @@ import RegistrationPage from '@pages/RegistrationPage/RegistrationPage';
 import { ResultPage } from '@pages/RusultPage/ResultPage';
 import { HistoryRouter as Router } from "redux-first-history/rr6";
 import Loader from '@components/Loader/Loader';
-import { RootState } from '@redux/configure-store';
 import { useSelector } from 'react-redux';
+import { stateOfLoading } from '@redux/isLoadingSlice';
+import { routes } from './routes/routes';
 
 const App = () => {
-    const isLoading = useSelector((state: RootState) => state.isLoading.isLoading);
+    const isLoading = useSelector(stateOfLoading);
 
     return (
         <>
@@ -20,13 +21,13 @@ const App = () => {
                 <Loader isLoading={isLoading} />
                 <Router history={history}>
                     <Routes >
-                        <Route path='/auth' element={<RegistrationPage />} />
-                        <Route path="/" element={<Navigate to="/auth" />} />
-                        <Route path='/main' element={<MainPage />} />
-                        <Route path='/auth/registration' element={<RegistrationPage keyValue='2' />} />
-                        <Route path='/result/:inf' element={<ResultPage />} />
-                        <Route path='/auth/confirm-email' element={<ConfirmEmail />} />
-                        <Route path='/auth/change-password' element={<ChangePassword />} />
+                        <Route path={routes.AUTH_PATH} element={<RegistrationPage />} />
+                        <Route path={routes.DEFAULT_PATH} element={<Navigate to={routes.AUTH_PATH} />} />
+                        <Route path={routes.MAIN_PATH} element={<MainPage />} />
+                        <Route path={routes.REGISTRATION_PATH} element={<RegistrationPage keyValue='2' />} />
+                        <Route path={routes.RESULT_PATH} element={<ResultPage />} />
+                        <Route path={routes.CONFIRM_EMAIL_PATH} element={<ConfirmEmail />} />
+                        <Route path={routes.CHANGE_PASSWORD_PATH} element={<ChangePassword />} />
                     </Routes>
                 </Router >
             </div>

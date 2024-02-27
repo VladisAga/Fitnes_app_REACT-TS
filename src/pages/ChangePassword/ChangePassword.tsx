@@ -5,15 +5,15 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { resultValues } from '@pages/RusultPage/resultValues';
 import { setPreviousValue } from '@redux/checkLocationSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@redux/configure-store';
+import { useDispatch } from 'react-redux';
 import { IPreviousValueRed } from '../../types/commonTypes';
 import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
+import { usePreviousLocation, usePreviousValueRed } from '../../selectors/selectors';
 
 const ChangePassword = () => {
     const [changePassword, { isLoading }] = usePostChangePasswordMutation();
-    const previousValueRed = useSelector((state: RootState) => state.checkLocation.previousValueRed) as IPreviousValueRed | null;
-    const previousLocation = useSelector((state: RootState) => state.router.previousLocations);
+    const previousValueRed = usePreviousValueRed() as IPreviousValueRed | null;
+    const previousLocation = usePreviousLocation();
     const [password, setPassword] = useState({});
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const ChangePassword = () => {
     const changePas = (value: any) => {
         setPassword(value);
         if (password) {
-            changePassword({ password: value.password, confirmPassword: value.confirm }).unwrap() //!!!!!!!
+            changePassword({ password: value.password, confirmPassword: value.confirm }).unwrap() 
                 .then(() => {
                     navigate(`/result/${resultValues['success-change-password'].trigger}`, { replace: true })
                 })

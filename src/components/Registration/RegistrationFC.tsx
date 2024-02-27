@@ -7,20 +7,22 @@ import { usePostNewUserMutation } from '@redux/usersApi';
 import { useState, useEffect } from 'react';
 import { resultValues } from '@pages/RusultPage/resultValues';
 import cn from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@redux/configure-store';
+import { useDispatch } from 'react-redux';
 import { setPreviousValue } from '@redux/checkLocationSlice';
 import { IPreviousValueRedReg } from '../../types/commonTypes';
 import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
+import { useWindowWidth } from '@hooks/useWindowWidth';
+import { usePreviousLocation, usePreviousValueRed } from '../../selectors/selectors';
 
 const RegistrationFC = () => {
-    const previousValueRed = useSelector((state: RootState) => state.checkLocation.previousValueRed) as IPreviousValueRedReg | null;
-    const previousLocation = useSelector((state: RootState) => state.router.previousLocations);
+    const previousValueRed = usePreviousValueRed() as IPreviousValueRedReg | null;
+    const previousLocation = usePreviousLocation();
     const [addUser, { isLoading }] = usePostNewUserMutation();
     const [btnState, setBtnState] = useState(false);
     const [userData, setUserData] = useState({});
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const windowWidth = useWindowWidth();
 
     useEffect(() => {
         if (previousLocation && previousLocation[1] && previousLocation[1].location?.pathname === '/result/error') {
@@ -131,7 +133,7 @@ const RegistrationFC = () => {
                 </Form.Item>
                 <Form.Item style={{ marginBottom: '0' }}>
                     <button className={styles.googleBtn}>
-                        <GooglePlusOutlined />
+                        <GooglePlusOutlined style={windowWidth <= 360 ? { display: 'none' } : {}} />
                         <NavLink to={''}>Регистрация через Google</NavLink>
                     </button>
                 </Form.Item>

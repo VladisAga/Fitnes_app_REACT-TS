@@ -6,7 +6,7 @@ import cn from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface IRegistrationPage {
+type IRegistrationPage = {
     keyValue?: string;
 }
 

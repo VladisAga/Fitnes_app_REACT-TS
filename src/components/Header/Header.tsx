@@ -1,8 +1,6 @@
 import { Layout } from 'antd';
-//import cn from 'classnames';
 import styles from './Header.module.scss';
 import { LinkFC } from '../LInk/LinkFC';
-// import { PageHeader } from '@ant-design/pro-layout';
 import { SettingOutlined } from '@ant-design/icons';
 import { useWindowWidth } from '@hooks/useWindowWidth';
 

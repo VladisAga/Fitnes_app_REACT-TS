@@ -1,5 +1,5 @@
 import styles from './EnterFC.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -9,18 +9,20 @@ import { initAuth, setAuth } from '../../redux/checkAuthSlice';
 import { savePreviousValue, getSavedValue, setPreviousValue } from '@redux/checkLocationSlice';
 import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
 import { resultValues } from '@pages/RusultPage/resultValues';
-import { RootState } from '@redux/configure-store';
+import { useWindowWidth } from '@hooks/useWindowWidth';
+import { usePreviousLocation, usePreviousValueRed } from '../../selectors/selectors';
 
 const EnterFC = () => {
     const dispatch = useDispatch();
-    const previousValueRed = useSelector((state: RootState) => state.checkLocation.previousValueRed);
-    const previousLocation = useSelector((state: RootState) => state.router.previousLocations);
+    const previousValueRed = usePreviousValueRed();
+    const previousLocation = usePreviousLocation();
     const [enter, { isLoading: enterLoad }] = usePostEnterUserMutation();
     const [checkEmail, { isLoading: checkEmailLoad }] = usePostCheckEmailMutation();
     const [userData, setUserData] = useState({});
     const [linkState, setLinkState] = useState(false);
     const [value, setValue] = useState('');
     const navigate = useNavigate();
+    const windowWidth = useWindowWidth();
 
     useEffect(() => {
         dispatch(getSavedValue('previousValue'));
@@ -146,7 +148,7 @@ const EnterFC = () => {
                 </Form.Item>
                 <Form.Item style={{ marginBottom: '0' }}>
                     <button className={styles.googleBtn}>
-                        <GooglePlusOutlined />
+                        <GooglePlusOutlined  style={windowWidth <= 360 ? { display: 'none' } : {}}/>
                         <NavLink to={''}>Войти через Google</NavLink>
                     </button>
                 </Form.Item>

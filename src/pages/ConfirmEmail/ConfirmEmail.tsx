@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@redux/configure-store';
+import { useDispatch } from 'react-redux';
 import styles from './ConfirmEmail.module.scss';
 import VerificationInput from "react-verification-input";
 import { usePostConfirmEmailMutation } from '@redux/usersApi';
 import { getSavedValue } from '@redux/checkLocationSlice';
 import { useNavigate } from 'react-router-dom';
 import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
+import { usePreviousValue } from '../../selectors/selectors';
 
 const ConfirmEmail = () => {
     const [confirmEmail, { isLoading: confirmLoading }] = usePostConfirmEmailMutation();
-    const previousValue = useSelector((state: RootState) => state.checkLocation.previousValue);
+    const previousValue = usePreviousValue();
     const [errorStatus, setErrorStatus] = useState(false);
     const [value, setValue] = useState<any>('')
     const inputRef = useRef<any>(null);

@@ -1,8 +1,8 @@
-export interface IPreviousValueRed {
+export type IPreviousValueRed = {
     password: string;
     confirm: string;
 } 
-export interface IPreviousValueRedReg {
+export type IPreviousValueRedReg = {
     password: string;
     user: any;
 } 

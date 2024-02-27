@@ -1,13 +1,9 @@
-// import cn from 'classnames';
 import { LinkFC } from '@components/LInk/LinkFC';
 import styles from './Footer.module.scss';
 import { Layout } from 'antd';
 const { Footer } = Layout;
-interface IFooter {
 
-}
-
-export const FooterFC: React.FC<IFooter> = () => {
+export const FooterFC: React.FC = () => {
     return (
         <>
             <section className={styles.footer}>

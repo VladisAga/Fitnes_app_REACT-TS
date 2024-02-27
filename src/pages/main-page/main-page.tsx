@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/checkAuthSlice';
-import { RootState } from '@redux/configure-store';
 import { CalendarTwoTone, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled } from '@ant-design/icons';
 import { Body } from '@components/Body/Body';
 import { HeaderFC } from '@components/Header/Header';
@@ -11,6 +10,7 @@ import cn from 'classnames';
 import { useNavigate } from "react-router-dom";
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 import styles from './main-page.module.scss';
+import { useIsAuthenticated } from '../../selectors/selectors';
 
 const { Sider } = Layout;
 const namesOfAside = ['Календарь', 'Тренировки', 'Достижения', 'Профиль']
@@ -25,7 +25,7 @@ const items = [CalendarTwoTone, HeartFilled, TrophyFilled, IdcardOutlined].map(
 
 export const MainPage: React.FC = () => {
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector((state: RootState) => state.checkAuth.auth);
+    const isAuthenticated = useIsAuthenticated();
     const navigate = useNavigate();
 
     const [collapsed, setCollapsed] = useState(false);
