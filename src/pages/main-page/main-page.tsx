@@ -1,13 +1,16 @@
-import React, { useState, useEffect, } from 'react';
-
-import { TrophyFilled, CalendarTwoTone, HeartFilled, MenuFoldOutlined, MenuUnfoldOutlined, IdcardOutlined } from '@ant-design/icons';
-import { Layout, Menu, Button } from 'antd';
-import styles from './main-page.module.scss';
-import { HeaderFC } from '@components/Header/Header';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/checkAuthSlice';
+import { CalendarTwoTone, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled } from '@ant-design/icons';
 import { Body } from '@components/Body/Body';
+import { HeaderFC } from '@components/Header/Header';
+import { LinkFC } from '@components/LInk/LinkFC';
+import { Button, Layout, Menu } from 'antd';
 import cn from 'classnames';
-import { Link } from '@components/LInk/Link';
-import { useWindowWidth } from './WindowWidth';
+import { useNavigate } from "react-router-dom";
+import { useWindowWidth } from '../../hooks/useWindowWidth';
+import styles from './main-page.module.scss';
+import { useIsAuthenticated } from '../../selectors/selectors';
 
 const { Sider } = Layout;
 const namesOfAside = ['Календарь', 'Тренировки', 'Достижения', 'Профиль']
@@ -21,17 +24,17 @@ const items = [CalendarTwoTone, HeartFilled, TrophyFilled, IdcardOutlined].map(
 );
 
 export const MainPage: React.FC = () => {
+    const dispatch = useDispatch();
+    const isAuthenticated = useIsAuthenticated();
+    const navigate = useNavigate();
+
     const [collapsed, setCollapsed] = useState(false);
     const [logo, setLogo] = useState('/logo.svg');
     const [dataTestId, setDataTestId] = useState('');
 
     const windowWidth = useWindowWidth();
-    console.log(dataTestId)
     useEffect(() => {
         switch (true) {
-            case (windowWidth >= 1440):
-                setDataTestId('sider-switch');
-                break;
             case (windowWidth >= 834):
                 setDataTestId('sider-switch');
                 break;
@@ -45,11 +48,19 @@ export const MainPage: React.FC = () => {
 
     useEffect(() => {
         if (windowWidth > 360) {
-            setLogo(collapsed ? '/public/logo_collapsed.svg' : '/public/logo.svg');
+            setLogo(collapsed ? '/logo_collapsed.svg' : '/logo.svg');
         } else {
-            setLogo('/public/logo_360px.svg')
+            setLogo('/logo_360px.svg')
         }
     }, [collapsed]);
+
+    useEffect(() => {
+        if (!isAuthenticated) navigate('/auth', { replace: true });
+    }, [isAuthenticated]);
+
+    const exit = () => {
+        dispatch(logout());
+    };
 
     return (
         <div className={styles.mainBox}>
@@ -70,19 +81,24 @@ export const MainPage: React.FC = () => {
                                     })} src={logo} alt='logo' />
                                 </div>
                             </div>
-                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} style={windowWidth < 480 ? {padding: '0'} :{ paddingLeft: collapsed ? '24px' : '16px' }} />
+                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items}
+                                style={windowWidth < 480
+                                    ? { padding: '0' }
+                                    : { paddingLeft: collapsed ? '24px' : '16px' }} />
                         </section>
-                        <section className={styles.exit}>
-                            <Link href='#' className={cn(styles['exitElem'], {
+                        <section className={styles.exit} onClick={exit}>
+                            <LinkFC href={'/auth'} className={cn(styles['exitElem'], {
                                 [styles['exitCollapsed']]: collapsed
-                            })} >{!collapsed && <span>Выход</span>}</Link>
+                            })} >{!collapsed && <span>Выход</span>}</LinkFC>
                         </section>
                     </Sider>
                     <div className={styles.rictangle} style={windowWidth < 480 && collapsed ? { left: '0' } : undefined}>
                         <Button className={styles.sideBtn}
                             data-test-id={dataTestId}
                             type="text"
-                            icon={!collapsed ? <MenuUnfoldOutlined width={12.5} height={11} /> : <MenuFoldOutlined width={12.5} height={11} />}
+                            icon={!collapsed
+                                ? <MenuUnfoldOutlined width={12.5} height={11} />
+                                : <MenuFoldOutlined width={12.5} height={11} />}
                             onClick={() => setCollapsed(!collapsed)}
                             style={windowWidth < 480 ? {
                                 width: 32,
@@ -105,5 +121,6 @@ export const MainPage: React.FC = () => {
             </Layout>
         </div >
     );
-
 };
+
+

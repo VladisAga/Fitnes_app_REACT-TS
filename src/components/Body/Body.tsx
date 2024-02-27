@@ -1,16 +1,11 @@
 import cn from 'classnames';
 import styles from './Body.module.scss';
-// import React, { ReactNode } from 'react';
 import { Layout, } from 'antd';
 import { Button } from '@components/Button/Button';
 import { FooterFC } from '@components/Footer/Footer';
 const { Content } = Layout;
 
-interface IBody {
-
-}
-
-export const Body: React.FC<IBody> = () => {
+export const Body: React.FC = () => {
     return (
         <>
             <section className={styles.body}>
