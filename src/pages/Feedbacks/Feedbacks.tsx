@@ -66,7 +66,7 @@ const Feedbacks = () => {
     return (
         <section className={styles.feedbacks}>
             <header>
-                <section className={styles.topicLinks} style={data ? { marginBottom: '24px' } : { marginBottom: '326px' }}>
+                <section className={styles.topicLinks} style={data ? { marginBottom: '24px' } : {}}>
                     <LinkFC href='/main' className={styles['linkColor']}>Главная</LinkFC>
                     <span className={styles.divider}>/</span>
                     <LinkFC href='/main'>Отзывы пользователей</LinkFC>
