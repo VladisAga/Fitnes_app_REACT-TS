@@ -1,0 +1,85 @@
+body {
+    :global {
+        .ant-modal-wrap {
+            background-color: rgba(121, 156, 213, 0.5);
+            backdrop-filter: blur(3px);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .ant-modal-close,
+        .ant-btn-default,
+        .ant-btn-primary,
+        .ant-modal-footer {
+            display: none;
+        }
+
+        .ant-modal-body {
+            padding: 0;
+        }
+    }
+}
+
+.modalInside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 32px 56px;
+
+    .imgBox {
+        max-width: 253.5px;
+        padding-bottom: 24px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .errorTopic {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+        text-align: center;
+    }
+
+    .errorText {
+        font-size: 14px;
+        color: rgb(140, 140, 140);
+        margin: 0;
+        padding-bottom: 24px;
+    }
+
+    .btn {
+        background-color: rgb(47, 84, 235);
+        border-radius: 2px;
+        color: white;
+        font-weight: 300;
+        font-size: 14px;
+        width: 76px;
+        height: 40px;
+    }
+
+    .btnArea {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .btnTryAgain {
+        border-radius: 2px;
+        border: 1px solid rgb(217, 217, 217);
+        background-color: transparent;
+        color: black;
+        min-width: 160px;
+    }
+}
+
+@media all and (max-width: 400px) {
+    .modalInside {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 32px 16px ;
+    }
+
+}

@@ -3,7 +3,7 @@ import styles from './EnterFC.module.scss';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { usePostNewUserMutation } from '@redux/usersApi';
+import { useLazyAuthUsingGoogleQuery, usePostNewUserMutation } from '@redux/usersApi';
 import { useState, useEffect } from 'react';
 import { resultValues } from '@pages/RusultPage/resultValues';
 import cn from 'classnames';
@@ -17,12 +17,18 @@ import { usePreviousLocation, usePreviousValueRed } from '../../selectors/select
 const RegistrationFC = () => {
     const previousValueRed = usePreviousValueRed() as IPreviousValueRedReg | null;
     const previousLocation = usePreviousLocation();
+    const [googleAuth, { isFetching: googleFetching }] = useLazyAuthUsingGoogleQuery();
     const [addUser, { isLoading }] = usePostNewUserMutation();
     const [btnState, setBtnState] = useState(false);
     const [userData, setUserData] = useState({});
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const windowWidth = useWindowWidth();
+
+    const registrationByGoogle = () => {
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+        googleAuth(null);
+    };
 
     useEffect(() => {
         if (previousLocation && previousLocation[1] && previousLocation[1].location?.pathname === '/result/error') {
@@ -71,11 +77,11 @@ const RegistrationFC = () => {
     };
 
     useEffect(() => {
-        if (isLoading) {
+        if (isLoading || googleFetching) {
             dispatch(setStateOfLoadTrue());
         }
         return () => { dispatch(setStateOfLoadFalse()); }
-    }, [isLoading]);
+    }, [isLoading, googleFetching]);
 
     return (
         <section className={styles.enterForm}>
@@ -132,7 +138,7 @@ const RegistrationFC = () => {
                     </Button>
                 </Form.Item>
                 <Form.Item style={{ marginBottom: '0' }}>
-                    <button className={styles.googleBtn}>
+                    <button className={styles.googleBtn} onClick={registrationByGoogle}>
                         <GooglePlusOutlined style={windowWidth <= 360 ? { display: 'none' } : {}} />
                         <NavLink to={''}>Регистрация через Google</NavLink>
                     </button>

@@ -6,7 +6,8 @@ export const checkLocationSlice = createSlice({
     initialState: {
         previousPath: null,
         previousValue: '',
-        previousValueRed: null
+        previousValueRed: null,
+        
     },
     reducers: {
         setPreviousValue: (state, action) => {

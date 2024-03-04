@@ -7,6 +7,7 @@ type ILink = {
     href: string;
     children: ReactNode;
     className?: string;
+    onClick?: () => void;
 }
 
 export const LinkFC: React.FC<ILink> = ({ children, className, href, ...props }) => (

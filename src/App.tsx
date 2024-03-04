@@ -11,6 +11,8 @@ import Loader from '@components/Loader/Loader';
 import { useSelector } from 'react-redux';
 import { stateOfLoading } from '@redux/isLoadingSlice';
 import { routes } from './routes/routes';
+import Feedbacks from '@pages/Feedbacks/Feedbacks';
+import MainLayout from './layouts/MainLayout/MainLayout';
 
 const App = () => {
     const isLoading = useSelector(stateOfLoading);
@@ -23,7 +25,10 @@ const App = () => {
                     <Routes >
                         <Route path={routes.AUTH_PATH} element={<RegistrationPage />} />
                         <Route path={routes.DEFAULT_PATH} element={<Navigate to={routes.AUTH_PATH} />} />
-                        <Route path={routes.MAIN_PATH} element={<MainPage />} />
+                        <Route element={<MainLayout />}>
+                            <Route path={routes.MAIN_PATH} element={<MainPage />} />
+                            <Route path={routes.FEEDBACKS_PAGE} element={<Feedbacks />} />
+                        </Route>
                         <Route path={routes.REGISTRATION_PATH} element={<RegistrationPage keyValue='2' />} />
                         <Route path={routes.RESULT_PATH} element={<ResultPage />} />
                         <Route path={routes.CONFIRM_EMAIL_PATH} element={<ConfirmEmail />} />

@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import styles from './Body.module.scss';
 import { Layout, } from 'antd';
-import { Button } from '@components/Button/Button';
+import { ButtonFC } from '@components/Button/Button';
 import { FooterFC } from '@components/Footer/Footer';
 const { Content } = Layout;
 
@@ -38,15 +38,15 @@ export const Body: React.FC = () => {
                         <div className={styles.tasks}>
                             <div>
                                 <p>Расписание тренировки</p>
-                                <Button className={cn(styles['button'], styles['btn1'])}>Тренировки</Button>
+                                <ButtonFC className={cn(styles['button'], styles['btn1'])}>Тренировки</ButtonFC>
                             </div>
                             <div>
                                 <p>Назначить кадендарь</p>
-                                <Button className={cn(styles['button'], styles['btn2'])}>Календарь</Button>
+                                <ButtonFC className={cn(styles['button'], styles['btn2'])}>Календарь</ButtonFC>
                             </div>
                             <div>
                                 <p>Заполнить профиль</p>
-                                <Button className={cn(styles['button'], styles['btn3'])}>Профиль</Button>
+                                <ButtonFC className={cn(styles['button'], styles['btn3'])}>Профиль</ButtonFC>
                             </div>
                         </div>
                     </section>

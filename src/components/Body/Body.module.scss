@@ -17,9 +17,7 @@ $icon-padding-top: 2px;
 .body {
     :global {
         .ant-layout-content {
-            background-size: cover;
-            background-position: center;
-            background-image: url('/images/backImg_1440.png');
+            background-color: transparent;
         }
     }
 
@@ -116,7 +114,6 @@ $icon-padding-top: 2px;
         .tasks {
             flex-direction: column;
             gap: 8px;
-
         }
 
         .content {

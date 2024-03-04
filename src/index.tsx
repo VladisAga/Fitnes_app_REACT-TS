@@ -3,7 +3,7 @@ import { store } from '@redux/configure-store';
 import { Provider } from 'react-redux';
 
 import 'normalize.css';
-import './index.css';
+import './index.module.scss';
 
 import App from './App';
 

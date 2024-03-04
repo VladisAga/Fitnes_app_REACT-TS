@@ -8,3 +8,5 @@ export const usePreviousValue = () => useSelector((state: RootState) => state.ch
 export const useIsAuthenticated = () => useSelector((state: RootState) => state.checkAuth.auth);
 
 export const usePreviousValueRed = () => useSelector((state: RootState) => state.checkLocation.previousValueRed);
+
+export const useIsSessionToken = () => useSelector((state: RootState) => state.checkAuth.token);

@@ -1,0 +1,26 @@
+.commentsList {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 730px;
+    overflow-y: scroll;
+    margin: 0 auto;
+    scroll-snap-type: y mandatory;
+    scroll-snap-align: end;
+    height: 66vh;
+}
+
+.commentsList::-webkit-scrollbar {
+    width: 4px;
+}
+
+.commentsList::-webkit-scrollbar-thumb {
+    background-color: #74e4ee;
+    border-radius: 5px;
+}
+
+.comment {
+    list-style-type: none;
+    max-width: 1328px;
+}
