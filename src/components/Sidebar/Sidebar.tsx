@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Sidebar.module.scss';
-import { Button, Layout, Menu } from 'antd';
-import { CalendarTwoTone, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled } from '@ant-design/icons';
-import { useIsAuthenticated } from '../../selectors/selectors';
-import cn from 'classnames';
-import { useNavigate } from "react-router-dom";
-import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/checkAuthSlice';
+import { useNavigate } from "react-router-dom";
+import { CalendarTwoTone, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled } from '@ant-design/icons';
 import { LinkFC } from '@components/LInk/LinkFC';
+import { Button, Layout, Menu } from 'antd';
+import cn from 'classnames';
+
+import { useWindowWidth } from '../../hooks/useWindowWidth';
+import { logout } from '../../redux/checkAuthSlice';
+import { useIsAuthenticated } from '../../selectors/selectors';
+
+import styles from './Sidebar.module.scss';
 
 const { Sider } = Layout;
 const namesOfAside = ['Календарь', 'Тренировки', 'Достижения', 'Профиль'];
@@ -81,7 +83,7 @@ const Sidebar = () => {
                             <div className={cn('demo-logo-vertical')}>
                                 <div className={styles.boxLogo}>
                                     <img className={cn(styles.img, {
-                                        [styles['imgCollapsed']]: collapsed,
+                                        [styles.imgCollapsed]: collapsed,
                                     })} src={logo} alt='logo' />
                                 </div>
                             </div>
@@ -91,8 +93,8 @@ const Sidebar = () => {
                                     : { paddingLeft: collapsed ? '24px' : '16px' }} />
                         </section>
                         <section className={styles.exit} onClick={exit}>
-                            <LinkFC href={'/auth'} className={cn(styles['exitElem'], {
-                                [styles['exitCollapsed']]: collapsed
+                            <LinkFC href={'/auth'} className={cn(styles.exitElem, {
+                                [styles.exitCollapsed]: collapsed
                             })} >{!collapsed && <span>Выход</span>}</LinkFC>
                         </section>
                     </Sider>

@@ -1,18 +1,20 @@
-import style from './App.module.scss';
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { history } from '@redux/configure-store';
-import { MainPage } from '@pages/main-page';
-import ConfirmEmail from '@pages/ConfirmEmail/ConfirmEmail';
+import { useSelector } from 'react-redux';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Loader from '@components/Loader/Loader';
 import ChangePassword from '@pages/ChangePassword/ChangePassword';
+import ConfirmEmail from '@pages/ConfirmEmail/ConfirmEmail';
+import Feedbacks from '@pages/Feedbacks/Feedbacks';
+import { MainPage } from '@pages/main-page';
 import RegistrationPage from '@pages/RegistrationPage/RegistrationPage';
 import { ResultPage } from '@pages/RusultPage/ResultPage';
-import { HistoryRouter as Router } from "redux-first-history/rr6";
-import Loader from '@components/Loader/Loader';
-import { useSelector } from 'react-redux';
+import { history } from '@redux/configure-store';
 import { stateOfLoading } from '@redux/isLoadingSlice';
-import { routes } from './routes/routes';
-import Feedbacks from '@pages/Feedbacks/Feedbacks';
+import { HistoryRouter as Router } from "redux-first-history/rr6";
+
 import MainLayout from './layouts/MainLayout/MainLayout';
+import { routes } from './routes/routes';
+
+import style from './App.module.scss';
 
 const App = () => {
     const isLoading = useSelector(stateOfLoading);

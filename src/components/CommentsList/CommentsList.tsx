@@ -1,5 +1,7 @@
-import { TComments } from '../../types/commonTypes';
 import CommentFC from '@components/CommentFC/CommentFC';
+
+import { TComments } from '../../types/commonTypes';
+
 import styles from './CommentsList.module.scss';
 
 type TCommentsList = {

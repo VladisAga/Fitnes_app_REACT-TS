@@ -95,15 +95,15 @@ $icon-padding-top: 2px;
             padding: 19px 0;
         }
 
-        .btn1::before {
+        .btn1:before {
             @include icon-before('/images/icons/Property 1=heart.svg');
         }
 
-        .btn2::before {
+        .btn2:before {
             @include icon-before('/images/icons/Property 1=calendar.svg');
         }
 
-        .btn3::before {
+        .btn3:before {
             @include icon-before('/images/icons/Property 1=profile.svg');
         }
     }

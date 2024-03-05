@@ -1,9 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-type PostFeedbackArgs = {
-    body: any;
-    token: string;
-}
+import { TFeedBackBody,TPostFeedbackArgs } from '../types/commonTypes';
 
 export const usersApi = createApi({
     reducerPath: 'usersApi',
@@ -61,13 +58,13 @@ export const usersApi = createApi({
             providesTags: (result) =>
                 result
                     ? [
-                        ...result.map((id: any) => ({ type: 'Comments' as const, id })),
+                        ...result.map((id: number) => ({ type: 'Comments' as const, id })),
                         { type: 'Comments', id: 'LIST' },
                     ]
                     : [{ type: 'Comments', id: 'LIST' }],
         }),
-        postFeedback: build.mutation<{ body: any; token: string }, any>({
-            query: ({ body, token }: PostFeedbackArgs) => ({
+        postFeedback: build.mutation<{ body: TFeedBackBody; token: string }, any>({
+            query: ({ body, token }: TPostFeedbackArgs) => ({
                 url: 'feedback',
                 method: 'POST',
                 credentials: 'include',

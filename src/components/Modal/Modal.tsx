@@ -1,8 +1,10 @@
-import { Modal } from 'antd';
-import styles from './Modal.module.scss';
 import { ButtonFC } from '@components/Button/Button';
-import { TmodalInf } from '../../types/commonTypes';
+import { Modal } from 'antd';
 import cn from 'classnames';
+
+import { TmodalInf } from '../../types/commonTypes';
+
+import styles from './Modal.module.scss';
 
 type TModalFC = {
     isModalOpen: boolean;
@@ -23,9 +25,9 @@ const ModalFC: React.FC<TModalFC> = ({ isModalOpen, handleOk, modalInf, extraBtn
                 <p className={styles.errorTopic}>{topic}</p>
                 {btnText && <p className={styles.errorText}>{text}</p>}
                 <div className={styles.btnArea} style={btnText === 'Отлично' ? customStyle : {}}>
-                    {btnTryAgain && <ButtonFC onClick={extraBtn} data-test-id='write-review-not-saved-modal' style={customStyle} className={styles['btn']} >{btnTryAgain}</ButtonFC>}
-                    <ButtonFC onClick={handleOk} style={btnText === 'Отлично' ? customStyle : {}} className={cn(styles['btn'], {
-                        [styles['btnTryAgain']]: btnTryAgain
+                    {btnTryAgain && <ButtonFC onClick={extraBtn} data-test-id='write-review-not-saved-modal' style={customStyle} className={styles.btn} >{btnTryAgain}</ButtonFC>}
+                    <ButtonFC onClick={handleOk} style={btnText === 'Отлично' ? customStyle : {}} className={cn(styles.btn, {
+                        [styles.btnTryAgain]: btnTryAgain
                     })}>{btnText}</ButtonFC>
                 </div>
             </section>

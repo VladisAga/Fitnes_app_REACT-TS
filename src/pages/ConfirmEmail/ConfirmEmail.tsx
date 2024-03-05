@@ -1,19 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import styles from './ConfirmEmail.module.scss';
-import VerificationInput from "react-verification-input";
-import { usePostConfirmEmailMutation } from '@redux/usersApi';
-import { getSavedValue } from '@redux/checkLocationSlice';
 import { useNavigate } from 'react-router-dom';
-import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
+import VerificationInput from "react-verification-input";
+import { getSavedValue } from '@redux/checkLocationSlice';
+import { setStateOfLoadFalse, setStateOfLoadTrue } from '@redux/isLoadingSlice';
+import { usePostConfirmEmailMutation } from '@redux/usersApi';
+
 import { usePreviousValue } from '../../selectors/selectors';
+
+import styles from './ConfirmEmail.module.scss';
 
 const ConfirmEmail = () => {
     const [confirmEmail, { isLoading: confirmLoading }] = usePostConfirmEmailMutation();
     const previousValue = usePreviousValue();
     const [errorStatus, setErrorStatus] = useState(false);
-    const [value, setValue] = useState<any>('')
-    const inputRef = useRef<any>(null);
+    const [value, setValue] = useState<string>('')
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -23,9 +25,9 @@ const ConfirmEmail = () => {
     const clearInputArea = () => {
         if (inputRef.current) {
             const mainElem = inputRef.current.parentNode;
-            const childrenLength = mainElem.children.length;
-            for (let i = 1; i < childrenLength; i++) {
-                mainElem.children[i].textContent = '';
+            const childrenLength = mainElem && mainElem.children.length;
+            for (let i = 1; i < childrenLength!; i++) {
+                mainElem!.children[i].textContent = '';
             }
         }
     };
@@ -61,7 +63,7 @@ const ConfirmEmail = () => {
     }, [confirmLoading]);
 
     return (
-        <div className={styles['confirmBox']}>
+        <div className={styles.confirmBox}>
             <section className={styles.confirmSection} >
                 <div className={styles.confirmSecContent}>
                     <div className={styles.imgBox}>

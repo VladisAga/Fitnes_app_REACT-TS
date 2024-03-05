@@ -1,7 +1,9 @@
 import { StarFilled, StarOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Comment, Rate, Tooltip } from 'antd';
+
 import { TComments } from '../../types/commonTypes';
+
 import styles from './CommentFC.module.scss';
-import { Avatar, Comment, Tooltip, Rate } from 'antd';
 
 type TComment = {
     comment: TComments;

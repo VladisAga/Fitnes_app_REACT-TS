@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { RootState } from './configure-store';
+
 const initialState = {
     isLoading: false
 };
@@ -21,4 +23,4 @@ export const { setStateOfLoadTrue, setStateOfLoadFalse } = isLoadingSlice.action
 
 export default isLoadingSlice.reducer;
 
-export const stateOfLoading = (state: any) => state.isLoading.isLoading;
+export const stateOfLoading = (state: RootState) => state.isLoading.isLoading;

@@ -1,16 +1,19 @@
-import styles from './EnterFC.module.scss';
-import { useDispatch } from 'react-redux';
-import { GooglePlusOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { usePostEnterUserMutation, usePostCheckEmailMutation, useLazyAuthUsingGoogleQuery } from '@redux/usersApi';
 import { useEffect, useState } from 'react';
-import { initAuth, setAuth, saveToken } from '../../redux/checkAuthSlice';
-import { savePreviousValue, getSavedValue, setPreviousValue } from '@redux/checkLocationSlice';
-import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
-import { resultValues } from '@pages/RusultPage/resultValues';
+import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { GooglePlusOutlined } from '@ant-design/icons';
 import { useWindowWidth } from '@hooks/useWindowWidth';
+import { resultValues } from '@pages/RusultPage/resultValues';
+import { getSavedValue, savePreviousValue, setPreviousValue } from '@redux/checkLocationSlice';
+import { setStateOfLoadFalse, setStateOfLoadTrue } from '@redux/isLoadingSlice';
+import { useLazyAuthUsingGoogleQuery, usePostCheckEmailMutation, usePostEnterUserMutation } from '@redux/usersApi';
+import { Button, Checkbox, Form, Input } from 'antd';
+
+import { initAuth, saveToken, setAuth } from '../../redux/checkAuthSlice';
 import { usePreviousLocation, usePreviousValueRed } from '../../selectors/selectors';
+import { TValues } from '../../types/commonTypes';
+
+import styles from './EnterFC.module.scss';
 
 const EnterFC = () => {
     const dispatch = useDispatch();
@@ -56,7 +59,7 @@ const EnterFC = () => {
             }
         }
     }, [previousLocation, googleAuth]);
-    
+
     useEffect(() => {
         if (previousLocation && previousLocation[1] && previousLocation[1].location?.pathname === '/result/error-check-email') {
             checkEmail({ email: previousValueRed }).unwrap()
@@ -75,12 +78,12 @@ const EnterFC = () => {
         }
     }, [previousValueRed]);
 
-    const handleAddUser = (values: any) => {
+    const handleAddUser = (values: TValues) => {
         setUserData(values);
         if (values) {
             enter({ ...values.user, password: values.password }).unwrap()
                 .then((data) => {
-                    const action: any = setAuth(true);
+                    const action = setAuth(true);
                     dispatch(action);
                     if (values.remember) {
                         localStorage.setItem('token', data.accessToken);

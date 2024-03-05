@@ -1,7 +1,9 @@
-import { NavLink, useParams, useLocation } from "react-router-dom";
-import { resultValues } from "./resultValues";
-import styles from './ResultPage.module.scss';
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import cn from 'classnames';
+
+import { resultValues } from "./resultValues";
+
+import styles from './ResultPage.module.scss';
 
 type ResultValue = {
     img: string;
@@ -19,8 +21,8 @@ export const ResultPage = () => {
     const { inf } = useParams();
     const data: ResultValue = resultValues[inf as keyof typeof resultValues];
     return (
-        <div className={cn(styles['resBox'], {
-            [styles['error']]: location.pathname === "/result/error-check-email"
+        <div className={cn(styles.resBox, {
+            [styles.error]: location.pathname === "/result/error-check-email"
         })}>
             <section className={styles.resultSection} >
                 <div className={styles.resultSecContent}>

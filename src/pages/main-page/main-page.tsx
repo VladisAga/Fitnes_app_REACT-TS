@@ -1,14 +1,12 @@
 import { Body } from '@components/Body/Body';
 import { HeaderFC } from '@components/Header/Header';
 
-export const MainPage: React.FC = () => {
+export const MainPage: React.FC = () => (
+    <>
+        <HeaderFC />
+        <Body />
+    </>
+);
 
-    return (
-        <>
-            <HeaderFC />
-            <Body />
-        </>
-    );
-};
 
 

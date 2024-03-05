@@ -9,7 +9,7 @@ export const modalInf = {
         src: "/images/result_icon/success.svg",
         topic: 'Отзыв успешно опубликован',
         btnText: 'Отлично',
-        customStyle: {width: '90%'}
+        customStyle: { width: '90%' }
     },
     modalError: {
         src: "/images/result_icon/error.svg",
@@ -17,6 +17,6 @@ export const modalInf = {
         text: 'Что-то пошло не так. Попробуйте еше раз.',
         btnText: 'Закрыть',
         btnTryAgain: 'Написать отзыв',
-        customStyle: {width: '100%'}
+        customStyle: { width: '100%' }
     }
 }

@@ -37,7 +37,7 @@ $icon-padding-top: 2px;
         .downloadSection {
             background-color: white;
             min-width: 240px;
-            
+
             .download {
                 font-size: 16px;
                 color: rgb(47, 84, 235);
@@ -64,12 +64,12 @@ $icon-padding-top: 2px;
                 padding: 7px 0;
             }
 
-            .android::before {
+            .android:before {
                 @include icon-before('/images/icons/android.svg');
             }
 
 
-            .ios::before {
+            .ios:before {
                 @include icon-before('/images/icons/apple.svg');
             }
 
@@ -92,11 +92,11 @@ $icon-padding-top: 2px;
     }
 
     @media all and (max-width: 480px) {
-        .downloadSection{
+        .downloadSection {
             width: 100%;
         }
 
-        .firstElem{
+        .firstElem {
             text-align: center;
         }
 
@@ -105,7 +105,7 @@ $icon-padding-top: 2px;
             column-gap: 53px;
         }
 
-        .footerContent .classToOrder .seeComment{
+        .footerContent .classToOrder .seeComment {
             padding-top: 33.5px;
             padding-bottom: 51.5px;
         }

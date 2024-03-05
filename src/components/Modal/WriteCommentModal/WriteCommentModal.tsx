@@ -1,16 +1,18 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import styles from './WriteComment.module.scss';
-import { Modal, Rate } from 'antd';
-import { ButtonFC } from '@components/Button/Button';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CloseOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
-import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
-import { usePostFeedbackMutation } from '@redux/usersApi';
-import { useIsSessionToken } from '../../../selectors/selectors';
+import { ButtonFC } from '@components/Button/Button';
 import { modalInf } from '@components/Modal/modalInf';
-import { TmodalInf } from '../../../types/commonTypes';
+import { setStateOfLoadFalse, setStateOfLoadTrue } from '@redux/isLoadingSlice';
+import { usePostFeedbackMutation } from '@redux/usersApi';
+import { Modal, Rate } from 'antd';
 import cn from 'classnames';
+
+import { useIsSessionToken } from '../../../selectors/selectors';
+import { TmodalInf } from '../../../types/commonTypes';
 import ModalFC from '../Modal';
+
+import styles from './WriteComment.module.scss';
 
 type TWriteCommentModal = {
     isModalOpen: boolean;
@@ -34,7 +36,7 @@ export const WriteCommentModal: React.FC<TWriteCommentModal> = ({ isModalOpen, s
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    const handleChange = (event: any) => {
+    const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setTextValue(event.target.value);
         autoExpand();
     };
@@ -91,7 +93,7 @@ export const WriteCommentModal: React.FC<TWriteCommentModal> = ({ isModalOpen, s
             <Modal
                 title={<>
                     <p className={styles.title}>Ваш отзыв</p>
-                    <ButtonFC className={styles['btnClose']} onClick={handleCancel}><CloseOutlined /></ButtonFC>
+                    <ButtonFC className={styles.btnClose} onClick={handleCancel}><CloseOutlined /></ButtonFC>
                 </>
                 }
                 centered open={isModalOpen} onCancel={handleCancel}>
@@ -106,14 +108,15 @@ export const WriteCommentModal: React.FC<TWriteCommentModal> = ({ isModalOpen, s
                         }}
                     />
                     <textarea
+                        placeholder='Расскажите, почему Вам понравилось наше приложение.'
                         ref={textareaRef}
                         value={textValue}
                         onChange={handleChange}
                     ></textarea>
                 </section>
                 <footer className={styles.modalFooter}>
-                    <ButtonFC disabled={disabled} data-test-id='new-review-submit-button' onClick={sendFeedBack} className={cn(styles['senMsgBtn'], {
-                        [styles['disabled']]: disabled
+                    <ButtonFC disabled={disabled} data-test-id='new-review-submit-button' onClick={sendFeedBack} className={cn(styles.senMsgBtn, {
+                        [styles.disabled]: disabled
                     }
                     )}>Опубликовать</ButtonFC>
                 </footer>

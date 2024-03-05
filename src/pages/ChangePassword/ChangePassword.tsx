@@ -1,14 +1,16 @@
-import styles from './ChangePassword.module.scss';
-import { Button, Form, Input } from 'antd';
-import { usePostChangePasswordMutation } from '@redux/usersApi';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { resultValues } from '@pages/RusultPage/resultValues';
 import { setPreviousValue } from '@redux/checkLocationSlice';
-import { useDispatch } from 'react-redux';
-import { IPreviousValueRed } from '../../types/commonTypes';
-import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
+import { setStateOfLoadFalse, setStateOfLoadTrue } from '@redux/isLoadingSlice';
+import { usePostChangePasswordMutation } from '@redux/usersApi';
+import { Button, Form, Input } from 'antd';
+
 import { usePreviousLocation, usePreviousValueRed } from '../../selectors/selectors';
+import { IPreviousValueRed, TValuesPassword } from '../../types/commonTypes';
+
+import styles from './ChangePassword.module.scss';
 
 const ChangePassword = () => {
     const [changePassword, { isLoading }] = usePostChangePasswordMutation();
@@ -31,10 +33,10 @@ const ChangePassword = () => {
         }
     }, [previousValueRed]);
 
-    const changePas = (value: any) => {
+    const changePas = (value: TValuesPassword) => {
         setPassword(value);
         if (password) {
-            changePassword({ password: value.password, confirmPassword: value.confirm }).unwrap() 
+            changePassword({ password: value.password, confirmPassword: value.confirm }).unwrap()
                 .then(() => {
                     navigate(`/result/${resultValues['success-change-password'].trigger}`, { replace: true })
                 })
