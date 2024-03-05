@@ -86,7 +86,7 @@ export const WriteCommentModal: React.FC<TWriteCommentModal> = ({ isModalOpen, s
             dispatch(setStateOfLoadTrue());
         }
         return () => { dispatch(setStateOfLoadFalse()); }
-    }, [postFeedBackLoad]);
+    }, [postFeedBackLoad, dispatch]);
 
     return (
         <>

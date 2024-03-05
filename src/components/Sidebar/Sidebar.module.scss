@@ -41,6 +41,10 @@
 
         .ant-menu {
             background-color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: space-between;
         }
 
 
@@ -59,7 +63,7 @@
 
         .ant-menu-item {
             padding: 0 !important;
-            margin-left: 16px
+            margin: 0;
         }
 
         .ant-menu-item-selected {

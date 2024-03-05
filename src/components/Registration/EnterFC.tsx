@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { GooglePlusOutlined } from '@ant-design/icons';
@@ -22,7 +22,6 @@ const EnterFC = () => {
     const [enter, { isLoading: enterLoad }] = usePostEnterUserMutation();
     const [checkEmail, { isLoading: checkEmailLoad }] = usePostCheckEmailMutation();
     const [googleAuth, { isFetching: googleFetching }] = useLazyAuthUsingGoogleQuery();
-    const [userData, setUserData] = useState({});
     const [linkState, setLinkState] = useState(false);
     const [value, setValue] = useState('');
     const navigate = useNavigate();
@@ -30,18 +29,18 @@ const EnterFC = () => {
 
     useEffect(() => {
         dispatch(getSavedValue('previousValue'));
-    }, [])
+    }, [dispatch])
 
-    const checkAndRedirect = () => {
+    const checkAndRedirect = useCallback(() => {
         const token = localStorage.getItem('token');
         if (token) {
             navigate(`/main`, { replace: true, state: 'true' });
         }
-    };
+    }, [navigate]);
 
     useEffect(() => {
         checkAndRedirect();
-    }, [navigate]);
+    }, [navigate, checkAndRedirect]);
 
     const registrationByGoogle = () => {
         window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
@@ -58,7 +57,7 @@ const EnterFC = () => {
                 checkAndRedirect();
             }
         }
-    }, [previousLocation, googleAuth]);
+    }, [previousLocation, googleAuth, dispatch, checkAndRedirect]);
 
     useEffect(() => {
         if (previousLocation && previousLocation[1] && previousLocation[1].location?.pathname === '/result/error-check-email') {
@@ -76,10 +75,9 @@ const EnterFC = () => {
                     }
                 });
         }
-    }, [previousValueRed]);
+    }, [previousValueRed, dispatch, checkEmail, navigate, previousLocation, value]);
 
     const handleAddUser = (values: TValues) => {
-        setUserData(values);
         if (values) {
             enter({ ...values.user, password: values.password }).unwrap()
                 .then((data) => {
@@ -126,7 +124,7 @@ const EnterFC = () => {
             dispatch(setStateOfLoadTrue());
         }
         return () => { dispatch(setStateOfLoadFalse()); }
-    }, [enterLoad, checkEmailLoad, googleFetching]);
+    }, [enterLoad, checkEmailLoad, googleFetching, dispatch]);
 
     return (
         <section className={styles.enterForm} >

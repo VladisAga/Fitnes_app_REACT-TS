@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { TFeedBackBody,TPostFeedbackArgs } from '../types/commonTypes';
+import { TFeedBackBody, TPostFeedbackArgs } from '../types/commonTypes';
 
 export const usersApi = createApi({
     reducerPath: 'usersApi',
@@ -63,7 +63,7 @@ export const usersApi = createApi({
                     ]
                     : [{ type: 'Comments', id: 'LIST' }],
         }),
-        postFeedback: build.mutation<{ body: TFeedBackBody; token: string }, any>({
+        postFeedback: build.mutation<{ body: TFeedBackBody; token: string }, object>({
             query: ({ body, token }: TPostFeedbackArgs) => ({
                 url: 'feedback',
                 method: 'POST',

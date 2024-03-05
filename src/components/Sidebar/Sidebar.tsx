@@ -63,7 +63,7 @@ const Sidebar = () => {
 
     useEffect(() => {
         if (!isAuthenticated) navigate('/auth', { replace: true });
-    }, [isAuthenticated]);
+    }, [isAuthenticated, navigate]);
 
     const exit = () => {
         dispatch(logout());

@@ -25,7 +25,7 @@ const RegistrationPage: React.FC<IRegistrationPage> = ({ keyValue }) => {
         if (key === '2') {
             navigate('/auth/registration', { replace: true })
         }
-    }, [key])
+    }, [key, navigate])
 
     const onChange = (key: string) => {
         setKey(key);

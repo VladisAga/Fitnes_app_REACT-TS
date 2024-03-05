@@ -35,7 +35,7 @@ const ConfirmEmail = () => {
     useEffect(() => {
         dispatch(getSavedValue('previousValue'));
         clearInputArea();
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (value.length === 6) {
@@ -53,14 +53,14 @@ const ConfirmEmail = () => {
                     setTimeout(() => clearInputArea());
                 })
         }
-    }, [value]);
+    }, [value, confirmEmail, navigate, previousValue]);
 
     useEffect(() => {
         if (confirmLoading) {
             dispatch(setStateOfLoadTrue());
         }
         return () => { dispatch(setStateOfLoadFalse()); }
-    }, [confirmLoading]);
+    }, [confirmLoading, dispatch]);
 
     return (
         <div className={styles.confirmBox}>

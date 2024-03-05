@@ -50,11 +50,11 @@ const RegistrationFC = () => {
                     }
                 })
         }
-    }, [previousValueRed]);
+    }, [previousValueRed, addUser, dispatch, navigate, previousLocation]);
 
     const click = () => {
         setBtnState(true);
-    }
+    };
 
     const handleAddUser = (values: TValuesReg) => {
         setUserData(values);
@@ -82,7 +82,7 @@ const RegistrationFC = () => {
             dispatch(setStateOfLoadTrue());
         }
         return () => { dispatch(setStateOfLoadFalse()); }
-    }, [isLoading, googleFetching]);
+    }, [isLoading, googleFetching, dispatch]);
 
     return (
         <section className={styles.enterForm}>

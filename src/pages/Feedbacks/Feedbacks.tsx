@@ -47,7 +47,7 @@ const Feedbacks = () => {
             return 0;
         });
         setComments(sortedData)
-    }, [feedBackLoading]);
+    }, [feedBackLoading, data]);
 
     const handleOk = () => {
         setIsModalOpen(false);
@@ -63,7 +63,7 @@ const Feedbacks = () => {
             dispatch(setStateOfLoadTrue());
         }
         return () => { dispatch(setStateOfLoadFalse()); }
-    }, [feedBackLoading]);
+    }, [feedBackLoading, dispatch]);
 
     return (
         <section className={styles.feedbacks}>

@@ -31,7 +31,7 @@ const ChangePassword = () => {
                     navigate(`/result/${resultValues['error-change-password'].trigger}`, { replace: true })
                 })
         }
-    }, [previousValueRed]);
+    }, [previousValueRed, changePassword, dispatch, navigate, previousLocation]);
 
     const changePas = (value: TValuesPassword) => {
         setPassword(value);
@@ -52,7 +52,7 @@ const ChangePassword = () => {
             dispatch(setStateOfLoadTrue());
         }
         return () => { dispatch(setStateOfLoadFalse()); }
-    }, [isLoading]);
+    }, [isLoading, dispatch]);
 
     return (
         <div className={styles.changePasBox}>
