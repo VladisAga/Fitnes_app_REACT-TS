@@ -1,16 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { usersApi } from './usersApi';
+import { createBrowserHistory } from "history";
+import { createReduxHistoryContext } from "redux-first-history";
+
 import checkAuthReducer from './checkAuthSlice';
 import checkLocationReducer from './checkLocationSlice';
 import isLoadingReducer from './isLoadingSlice'
-import { createReduxHistoryContext } from "redux-first-history";
-import { createBrowserHistory } from "history";
+import { usersApi } from './usersApi';
 
 const {
     createReduxHistory,
     routerMiddleware,
     routerReducer
-  } = createReduxHistoryContext({ history: createBrowserHistory(), savePreviousLocations: 5 });
+} = createReduxHistoryContext({ history: createBrowserHistory(), savePreviousLocations: 5 });
 
 export const store = configureStore({
     reducer: {

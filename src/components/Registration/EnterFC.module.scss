@@ -2,7 +2,6 @@ $mainColor: rgb(47, 84, 235);
 
 .enterForm {
     :global {
-
         .ant-form-item-explain-error {
             font-family: 'Inter';
             font-size: 12px;
@@ -48,12 +47,12 @@ $mainColor: rgb(47, 84, 235);
             font-size: 14px;
 
             font-family: 'Inter';
-            padding: 11px 11px;
+            padding: 11px;
             line-height: 1.2;
         }
 
         .ant-input-password {
-            padding: 11px 11px;
+            padding: 11px;
             line-height: 1.2;
         }
 

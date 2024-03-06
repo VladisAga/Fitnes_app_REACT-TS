@@ -17,9 +17,7 @@ $icon-padding-top: 2px;
 .body {
     :global {
         .ant-layout-content {
-            background-size: cover;
-            background-position: center;
-            background-image: url('/images/backImg_1440.png');
+            background-color: transparent;
         }
     }
 
@@ -49,7 +47,7 @@ $icon-padding-top: 2px;
         }
 
         li {
-            line-height: 1.1;
+            line-height: 1.4;
         }
 
         li:first-child~li:before {
@@ -97,15 +95,15 @@ $icon-padding-top: 2px;
             padding: 19px 0;
         }
 
-        .btn1::before {
+        .btn1:before {
             @include icon-before('/images/icons/Property 1=heart.svg');
         }
 
-        .btn2::before {
+        .btn2:before {
             @include icon-before('/images/icons/Property 1=calendar.svg');
         }
 
-        .btn3::before {
+        .btn3:before {
             @include icon-before('/images/icons/Property 1=profile.svg');
         }
     }
@@ -116,7 +114,6 @@ $icon-padding-top: 2px;
         .tasks {
             flex-direction: column;
             gap: 8px;
-
         }
 
         .content {

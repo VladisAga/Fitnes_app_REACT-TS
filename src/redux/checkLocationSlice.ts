@@ -1,12 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from '@reduxjs/toolkit';
 
+import { RootState } from './configure-store';
+
 export const checkLocationSlice = createSlice({
     name: 'checkLocation',
     initialState: {
         previousPath: null,
         previousValue: '',
-        previousValueRed: null
+        previousValueRed: null,
+
     },
     reducers: {
         setPreviousValue: (state, action) => {
@@ -26,7 +29,7 @@ export const { savePreviousValue, getSavedValue, setPreviousValue } = checkLocat
 
 export default checkLocationSlice.reducer;
 
-export const selectPreviousPath = (state: any) => state.checkLocation.previousPath;
+export const selectPreviousPath = (state: RootState) => state.checkLocation.previousPath;
 
 export const selectPreviousPathMemoized = createSelector(
     selectPreviousPath,

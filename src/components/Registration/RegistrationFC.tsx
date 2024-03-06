@@ -1,22 +1,25 @@
-import styles from './EnterFC.module.scss';
-
-import { GooglePlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { usePostNewUserMutation } from '@redux/usersApi';
-import { useState, useEffect } from 'react';
-import { resultValues } from '@pages/RusultPage/resultValues';
-import cn from 'classnames';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setPreviousValue } from '@redux/checkLocationSlice';
-import { IPreviousValueRedReg } from '../../types/commonTypes';
-import { setStateOfLoadTrue, setStateOfLoadFalse } from '@redux/isLoadingSlice';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { GooglePlusOutlined } from '@ant-design/icons';
 import { useWindowWidth } from '@hooks/useWindowWidth';
+import { resultValues } from '@pages/RusultPage/resultValues';
+import { setPreviousValue } from '@redux/checkLocationSlice';
+import { setStateOfLoadFalse, setStateOfLoadTrue } from '@redux/isLoadingSlice';
+import { useLazyAuthUsingGoogleQuery, usePostNewUserMutation } from '@redux/usersApi';
+import { Button, Form, Input } from 'antd';
+import cn from 'classnames';
+
 import { usePreviousLocation, usePreviousValueRed } from '../../selectors/selectors';
+import { IPreviousValueRedReg } from '../../types/commonTypes';
+import { TError, TValuesReg } from '../../types/commonTypes';
+
+import styles from './EnterFC.module.scss';
 
 const RegistrationFC = () => {
     const previousValueRed = usePreviousValueRed() as IPreviousValueRedReg | null;
     const previousLocation = usePreviousLocation();
+    const [googleAuth, { isFetching: googleFetching }] = useLazyAuthUsingGoogleQuery();
     const [addUser, { isLoading }] = usePostNewUserMutation();
     const [btnState, setBtnState] = useState(false);
     const [userData, setUserData] = useState({});
@@ -24,13 +27,18 @@ const RegistrationFC = () => {
     const dispatch = useDispatch();
     const windowWidth = useWindowWidth();
 
+    const registrationByGoogle = () => {
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+        googleAuth(null);
+    };
+
     useEffect(() => {
         if (previousLocation && previousLocation[1] && previousLocation[1].location?.pathname === '/result/error') {
             previousValueRed && addUser({ ...previousValueRed.user, password: previousValueRed.password }).unwrap()
                 .then(() => {
                     navigate(`/result/${resultValues['success'].trigger}`, { replace: true });
                 })
-                .catch((error: any) => {
+                .catch((error: TError) => {
                     dispatch(setPreviousValue(previousValueRed));
                     switch (error.status) {
                         case (409):
@@ -42,15 +50,14 @@ const RegistrationFC = () => {
                     }
                 })
         }
-    }, [previousValueRed]);
+    }, [previousValueRed, addUser, dispatch, navigate, previousLocation]);
 
     const click = () => {
         setBtnState(true);
-    }
+    };
 
-    const handleAddUser = (values: any) => {
+    const handleAddUser = (values: TValuesReg) => {
         setUserData(values);
-
         if (userData) {
             addUser({ ...values.user, password: values.password }).unwrap()
                 .then(() => {
@@ -71,11 +78,11 @@ const RegistrationFC = () => {
     };
 
     useEffect(() => {
-        if (isLoading) {
+        if (isLoading || googleFetching) {
             dispatch(setStateOfLoadTrue());
         }
         return () => { dispatch(setStateOfLoadFalse()); }
-    }, [isLoading]);
+    }, [isLoading, googleFetching, dispatch]);
 
     return (
         <section className={styles.enterForm}>
@@ -127,12 +134,12 @@ const RegistrationFC = () => {
                     <Input.Password data-test-id='registration-confirm-password' placeholder='Повторите пароль' />
                 </Form.Item>
                 <Form.Item style={{ marginBottom: '16px' }}>
-                    <Button data-test-id='registration-submit-button' type="primary" htmlType="submit" onClick={click} className={cn({ [styles['undefined']]: btnState })}>
+                    <Button data-test-id='registration-submit-button' type="primary" htmlType="submit" onClick={click} className={cn({ [styles.undefined]: btnState })}>
                         Войти
                     </Button>
                 </Form.Item>
                 <Form.Item style={{ marginBottom: '0' }}>
-                    <button className={styles.googleBtn}>
+                    <button className={styles.googleBtn} onClick={registrationByGoogle}>
                         <GooglePlusOutlined style={windowWidth <= 360 ? { display: 'none' } : {}} />
                         <NavLink to={''}>Регистрация через Google</NavLink>
                     </button>

@@ -1,14 +1,15 @@
-import { Layout } from 'antd';
-import styles from './Header.module.scss';
-import { LinkFC } from '../LInk/LinkFC';
 import { SettingOutlined } from '@ant-design/icons';
 import { useWindowWidth } from '@hooks/useWindowWidth';
+import { Layout } from 'antd';
+
+import { LinkFC } from '../LInk/LinkFC';
+
+import styles from './Header.module.scss';
 
 const { Header } = Layout;
 
 export const HeaderFC = () => {
     const windowWidth = useWindowWidth();
-
 
     return (
         <div className={styles.head}>
