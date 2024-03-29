@@ -1,0 +1,44 @@
+body {
+    :global {
+
+        .ant-picker-calendar,
+        .ant-picker-calendar-full .ant-picker-panel {
+            background-color: transparent;
+        }
+
+        .ant-picker-cell {
+            background-color: white;
+        }
+
+        .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date {
+            margin: 0;
+        }
+
+        .ant-picker-cell-inner {
+            min-height: 143px;
+        }
+
+        .ant-picker-content tbody tr:last-child {
+            display: none;
+        }
+
+    }
+}
+
+.calendar {
+    position: relative;
+}
+
+.containerDiv {
+    position: absolute;
+}
+
+tr {
+    display: flex;
+    column-gap: 9px;
+
+    td,
+    th {
+        flex: 1;
+    }
+}

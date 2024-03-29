@@ -6,16 +6,6 @@
             height: 100%;
             line-height: 1.5;
         }
-
-        path {
-            fill: rgba(0, 0, 0, 0.85);
-        }
-
-        .anticon {
-            display: inline-block;
-            height: 14px;
-            width: 14px;
-        }
     }
 
     .title {
@@ -31,32 +21,15 @@
     .someContent {
         margin: 14px 0 0;
         display: flex;
-
         justify-content: space-between;
         align-items: flex-start;
-
-        .config {
-            padding: 7px 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
     }
 
     @media all and (max-width: 834px) {
-        :global {
-            .anticon-setting {
-                display: none;
-            }
-
-
-        }
-
         .title {
             font-weight: 500;
             font-size: 24px;
         }
-
     }
 
     @media all and (max-width: 800px) {
@@ -66,24 +39,10 @@
     }
 
     @media all and (max-width: 480px) {
-        :global {
-            .anticon-setting {
-                display: inline-block;
-            }
-        }
 
         .someContent {
             flex-wrap: nowrap;
             gap: 0;
-
-            .config {
-                padding: 9px;
-                background-color: white;
-                gap: 0;
-                border-radius: 20px;
-                border: 1px solid rgba(0, 0, 0, 0.04);
-                margin-top: -10px;
-            }
         }
 
         .title {

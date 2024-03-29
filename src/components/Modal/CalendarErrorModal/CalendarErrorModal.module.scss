@@ -1,0 +1,58 @@
+.errorModal {
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modalFirstRow {
+    display: flex;
+
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        margin: 0;
+        margin-left: 16px;
+        max-width: 258px;
+    }
+
+    div {
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+
+        button {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+    }
+
+    .modalText {
+        font-weight: 400;
+        font-size: 14px;
+        color: rgb(140, 140, 140);
+    }
+}
+
+.textSection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modalBtnBox {
+    align-self: flex-end;
+
+    button {
+        background-color: rgb(47, 84, 235);
+        border-radius: 2px;
+        font-weight: 400;
+        color: white;
+        border: none;
+        outline: none;
+        padding: 5px 16px;
+    }
+}

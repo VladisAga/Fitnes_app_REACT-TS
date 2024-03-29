@@ -49,3 +49,9 @@ export type TPostFeedbackArgs = {
     body: TFeedBackBody;
     token: string;
 }
+export type TErrorModal = {
+    img: string;
+    topic: string;
+    text: string;
+    btnText: string;
+}

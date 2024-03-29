@@ -15,6 +15,7 @@ import MainLayout from './layouts/MainLayout/MainLayout';
 import { routes } from './routes/routes';
 
 import style from './App.module.scss';
+import CalendarPage from '@pages/CalendarPage/CalendarPage';
 
 const App = () => {
     const isLoading = useSelector(stateOfLoading);
@@ -29,7 +30,8 @@ const App = () => {
                         <Route path={routes.DEFAULT_PATH} element={<Navigate to={routes.AUTH_PATH} />} />
                         <Route element={<MainLayout />}>
                             <Route path={routes.MAIN_PATH} element={<MainPage />} />
-                            <Route path={routes.FEEDBACKS_PAGE} element={<Feedbacks />} />
+                            <Route path={routes.FEEDBACKS_PATH} element={<Feedbacks />} />
+                            <Route path={routes.CALENDAR_PATH} element={<CalendarPage />} />
                         </Route>
                         <Route path={routes.REGISTRATION_PATH} element={<RegistrationPage keyValue='2' />} />
                         <Route path={routes.RESULT_PATH} element={<ResultPage />} />

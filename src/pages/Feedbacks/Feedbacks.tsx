@@ -71,7 +71,7 @@ const Feedbacks = () => {
                 <section className={styles.topicLinks} style={comments.length > 0 ? { marginBottom: '24px' } : {}}>
                     <LinkFC href='/main' className={styles.linkColor}>Главная</LinkFC>
                     <span className={styles.divider}>/</span>
-                    <LinkFC href='/main'>Отзывы пользователей</LinkFC>
+                    <LinkFC href='/feedbacks'>Отзывы пользователей</LinkFC>
                 </section>
             </header>
             {comments.length === 0 && <section className={styles.noComments}>

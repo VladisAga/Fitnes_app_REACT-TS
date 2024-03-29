@@ -80,8 +80,18 @@ export const usersApi = createApi({
                 url: 'auth/google',
                 method: 'GET'
             })
-        })
+        }),
+        getTrainingList: build.query({
+            query: (token) => ({
+                url: 'catalogs/training-list',
+                method: 'GET',
+                redirect: 'follow',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }),
+        }),
     })
 })
 
-export const { usePostNewUserMutation, usePostEnterUserMutation, usePostCheckEmailMutation, usePostConfirmEmailMutation, usePostChangePasswordMutation, useGetFeedbacksQuery, usePostFeedbackMutation, useLazyAuthUsingGoogleQuery } = usersApi;
+export const { usePostNewUserMutation, usePostEnterUserMutation, usePostCheckEmailMutation, usePostConfirmEmailMutation, usePostChangePasswordMutation, useGetFeedbacksQuery, usePostFeedbackMutation, useLazyAuthUsingGoogleQuery, useLazyGetTrainingListQuery } = usersApi;

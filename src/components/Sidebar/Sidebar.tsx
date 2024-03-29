@@ -68,6 +68,15 @@ const Sidebar = () => {
     const exit = () => {
         dispatch(logout());
     };
+
+    const moveToPage = (key: string) => {
+        switch (key) {
+            case '1':
+                navigate('/calendar', { replace: true });
+                break;
+        }
+    };
+
     return (
         <>
             <div className={styles.mainBox}>
@@ -87,7 +96,7 @@ const Sidebar = () => {
                                     })} src={logo} alt='logo' />
                                 </div>
                             </div>
-                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items}
+                            <Menu onClick={({ key }) => moveToPage(key)} theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items}
                                 style={windowWidth < 480
                                     ? { padding: '0' }
                                     : { paddingLeft: collapsed ? '24px' : '16px' }} />

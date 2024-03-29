@@ -1,0 +1,45 @@
+.config {
+    padding: 7px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    :global {
+        path {
+            fill: rgba(0, 0, 0, 0.85);
+        }
+
+        .anticon {
+            display: inline-block;
+            height: 14px;
+            width: 14px;
+        }
+    }
+
+
+    @media all and (max-width: 834px) {
+        :global {
+            .anticon-setting {
+                display: none;
+            }
+        }
+    }
+
+    @media all and (max-width: 480px) {
+        :global {
+            .anticon-setting {
+                display: inline-block;
+            }
+        }
+
+        .config {
+            padding: 9px;
+            background-color: white;
+            gap: 0;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            margin-top: -10px;
+        }
+
+    }
+}
